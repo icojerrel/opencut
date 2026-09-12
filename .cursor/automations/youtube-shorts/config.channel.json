@@ -1,0 +1,112 @@
+{
+  "niche": "psychology and human behavior: why people do things that make no sense, cognitive biases, social experiments, body language secrets, and mind tricks that explain everyday life",
+
+  "channel_persona": "A curious narrator who reveals the hidden psychology behind ordinary moments. Opens with a counterintuitive hook, explains one clear idea in plain language, and ends with a question that makes viewers tag someone in the comments.",
+
+  "editorial": {
+    "cta": "Follow for one psychology fact every day.",
+    "item_noun": "psychology fact",
+    "banned_topics": "generic motivational quotes without a study or mechanism, pop psychology with no source, diagnosing mental illness, trauma porn, manipulative dating 'alpha' advice",
+    "banned_kinds": "vague life advice with no concrete example, listicles of zodiac or personality types without research",
+    "stakes": "recognition ('that is literally me'), surprise at how predictable humans are, and a small behavior change the viewer can try today",
+    "prefer": "named cognitive biases, famous social psychology experiments, counterintuitive findings with a number, behaviors people notice in themselves or others",
+    "strongest_angles": "why smart people do dumb things, what your habits reveal about you, the psychology of scrolling, why arguments never change minds, small phrases that shift power in conversation",
+    "hook_examples": "Bad: 'Psychology is interesting.' Good: 'People who say they are fine are statistically the ones most likely to be lying.'",
+    "visual_direction": "abstract human silhouettes, brain imagery, split-screen comparisons, minimal text overlays, moody cinematic lighting — no celebrity faces or recognizable people",
+    "extra_rules": "Every video must teach one named concept or one study-backed insight. Include one concrete 'try this today' action before the CTA."
+  },
+
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "target_seconds": 50,
+    "clips_count": 6,
+    "transition_seconds": 0.4,
+    "music_volume": 0.06,
+    "ai_image_ratio": 0.78,
+    "ai_style": "viral YouTube Shorts aesthetic, cinematic psychology documentary, deep purple and electric teal color grade, high contrast, dramatic rim lighting, symbolic surreal imagery of minds and human silhouettes, subtle film grain, 8k photorealistic, no readable text, no faces of real celebrities",
+    "renderer": "remotion",
+    "fallback_search_terms": [
+      "person thinking silhouette dark",
+      "brain neurons abstract purple",
+      "crowd walking city night",
+      "mirror reflection mood cinematic",
+      "hands scrolling phone glow",
+      "conversation cafe intimate",
+      "eye close up dramatic light"
+    ]
+  },
+
+  "tts": {
+    "voice": "en-US-ChristopherNeural",
+    "rate": "-2%",
+    "pitch": "-1Hz",
+    "dynamic": true,
+    "prosody_intensity": "subtle",
+    "bitrate": "192k"
+  },
+
+  "llm": {
+    "provider": "gemini",
+    "model": "gemini-flash-latest",
+    "quality_model": "gemini-2.5-pro"
+  },
+
+  "captions": {
+    "font": "Arial Black",
+    "font_size": 92,
+    "words_per_chunk": 2,
+    "primary_color": "&H00FFFFFF",
+    "highlight_color": "&H00FFD700"
+  },
+
+  "cleanup": {
+    "keep_local_videos": 0,
+    "broll_cache_mb": 150
+  },
+
+  "branding": {
+    "sonic_logo": "",
+    "sonic_logo_volume": 0.5
+  },
+
+  "playlists": [
+    "Cognitive Biases",
+    "Social Psychology",
+    "Body Language",
+    "Why We Do This",
+    "Mind Tricks"
+  ],
+
+  "upload": {
+    "enabled": true,
+    "privacy": "public",
+    "category_id": "27",
+    "made_for_kids": false,
+    "contains_synthetic_media": true,
+    "extra_tags": ["shorts", "psychology", "psychologyfacts", "mindset", "humanbehavior", "didyouknow", "brain", "facts"]
+  },
+
+  "schedule_time": "09:00",
+
+  "karpathy": {
+    "enabled": true,
+    "schedule_time": "23:00",
+    "auto_apply": false,
+    "min_score": 55
+  },
+
+  "longform": {
+    "items_count": 10,
+    "item_words": 120,
+    "intro_words": 40,
+    "outro_words": 30,
+    "width": 1920,
+    "height": 1080,
+    "font_size": 58,
+    "hook_font_size": 76,
+    "schedule_day": "Sunday",
+    "schedule_time": "14:00"
+  }
+}
