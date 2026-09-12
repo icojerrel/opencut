@@ -51,6 +51,10 @@ crontab -l 2>/dev/null | grep -v faceless-video-engine | crontab -
 
 Or run `bash setup_schedule_linux.sh --remove` in the engine repo.
 
+## GitHub Actions fallback (no dashboard login needed)
+
+If Cursor Automations cannot be created yet, three workflows in `.github/workflows/` run the same bootstrap on identical UTC cron schedules once `GEMINI_API_KEY` is set as a repository secret. They also support manual `workflow_dispatch`.
+
 ## Verify
 
 Trigger each automation once manually from the dashboard (Run now). Check logs under `/workspace/faceless-video-engine/logs/` in the agent run artifacts.
