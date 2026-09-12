@@ -1,0 +1,8 @@
+{
+  "name": "OpenCut + Why We Do This Shorts",
+  "repositoryDependencies": [
+    "https://github.com/Mystery-CLI/faceless-video-engine"
+  ],
+  "install": "bash .cursor/automations/youtube-shorts/bootstrap.sh",
+  "terminals": []
+}
