@@ -11,6 +11,7 @@ if [[ ! -d "$ENGINE/.git" ]]; then
 fi
 
 python3 -m pip install -q -r "$ENGINE/requirements.txt"
+export PATH="$HOME/.local/bin:$PATH"
 if [[ -f "$ENGINE/remotion/package-lock.json" ]]; then
   (cd "$ENGINE/remotion" && npm ci --silent 2>/dev/null) || (cd "$ENGINE/remotion" && npm install --silent)
 else
