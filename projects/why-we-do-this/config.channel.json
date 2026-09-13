@@ -79,9 +79,16 @@
     "Mind Tricks"
   ],
 
+  "channel": {
+    "name": "Why We Do This",
+    "handle": "WhyWeDoThisPsy",
+    "description": "One psychology fact every day — why humans do things that make no sense. Named cognitive biases, classic experiments, and mind tricks explained in under a minute. New Short daily.",
+    "keywords": "psychology, human behavior, cognitive bias, psychology facts, mind tricks, shorts"
+  },
+
   "upload": {
     "enabled": true,
-    "privacy": "public",
+    "privacy": "unlisted",
     "category_id": "27",
     "made_for_kids": false,
     "contains_synthetic_media": true,

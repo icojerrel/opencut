@@ -30,6 +30,13 @@ cp "$PROJECT/overlay/remotion/src/ShortVideo.tsx" "$ENGINE/remotion/src/"
 
 mkdir -p "$ENGINE/logs" "$ENGINE/data" "$ENGINE/output"
 touch "$ENGINE/.env"
+
+if [[ -n "${YOUTUBE_CLIENT_SECRET_JSON:-}" && ! -f "$ENGINE/client_secret.json" ]]; then
+  printf '%s' "$YOUTUBE_CLIENT_SECRET_JSON" > "$ENGINE/client_secret.json"
+fi
+if [[ -n "${YOUTUBE_TOKEN_JSON:-}" && ! -f "$ENGINE/token.json" ]]; then
+  printf '%s' "$YOUTUBE_TOKEN_JSON" > "$ENGINE/token.json"
+fi
 for key in GEMINI_API_KEY PEXELS_API_KEY YOUTUBE_API_KEY; do
   val="${!key:-}"
   if [[ -n "$val" ]]; then
