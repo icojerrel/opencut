@@ -85,11 +85,17 @@ Topic: **The Ironic Process Theory** · Title: *Why Your Brain Can't Forget on C
 3. Add to playlist **Why We Do This** (created on first upload if missing).
 4. Enable daily schedule (GitHub Actions or Cursor Automations).
 
+## Cloud VM browser login
+
+Google sign-in inside the Cloud Agent browser often fails (account recovery / "Something went wrong"). **Do not rely on VM login.**
+
+Use the desktop OAuth workaround instead: **`YOUTUBE_OAUTH_DESKTOP.md`**
+
 ## Blockers today
 
 | Item | Status |
 |------|--------|
-| `client_secret.json` | Missing |
-| `token.json` | Missing |
-| Channel created | User action in Studio |
+| `client_secret.json` | Missing — set `YOUTUBE_CLIENT_SECRET_JSON` secret or local OAuth |
+| `token.json` | Missing — set `YOUTUBE_TOKEN_JSON` secret after `authorize.py` locally |
+| Channel created | User action in Studio (any browser) |
 | Rendered Short ready | ✅ `short_20260913_070641.mp4` |
