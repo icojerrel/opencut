@@ -28,7 +28,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: bash .cursor/automations/youtube-shorts/bootstrap.sh
+        run: bash projects/why-we-do-this/bootstrap.sh
 
       - name: Run daily Short pipeline
         env:
@@ -36,7 +36,7 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          cd faceless-video-engine
+          cd projects/why-we-do-this/faceless-video-engine
           python3 run_daily.py --no-upload
 
       - name: Upload output artifact
@@ -44,5 +44,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: daily-short-${{ github.run_id }}
-          path: faceless-video-engine/output/*.mp4
+          path: projects/why-we-do-this/faceless-video-engine/output/*.mp4
           if-no-files-found: ignore

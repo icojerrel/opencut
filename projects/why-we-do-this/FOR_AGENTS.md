@@ -11,8 +11,8 @@ Three scheduled Cursor Automations replace local cron for the psychology Shorts 
 ## Shared rules
 
 1. Read and follow the skill file for this automation on every run.
-2. Run `bash .cursor/automations/youtube-shorts/bootstrap.sh` first.
-3. Work in `/workspace/faceless-video-engine` after bootstrap.
+2. Run `bash projects/why-we-do-this/bootstrap.sh` first.
+3. Work in `/workspace/projects/why-we-do-this/faceless-video-engine` after bootstrap.
 4. Never commit secrets. API keys come from Cloud Agent environment secrets.
 5. YouTube OAuth (`client_secret.json`, `token.json`) must exist in the engine root for uploads; skip upload gracefully if missing.
 6. **CoS two-way email** (when enabled): at run start, follow `skills/cos-inbox/SKILL.md` — read `icojerrel-opencut@agentmail.to`, process CoS replies, then send/reply **to** `icojerrel-cos@agentmail.to`. Never send from the CoS inbox. See `COS_HANDOFF.md`.
@@ -20,6 +20,7 @@ Three scheduled Cursor Automations replace local cron for the psychology Shorts 
 
 ## Repository
 
-- **Primary:** `github.com/icojerrel/opencut` (this pack lives here)
-- **Engine:** cloned to `/workspace/faceless-video-engine` by bootstrap
-- **Channel config:** `.cursor/automations/youtube-shorts/config.channel.json`
+- **Project root:** `projects/why-we-do-this/` in `github.com/icojerrel/opencut`
+- **Engine:** cloned to `projects/why-we-do-this/faceless-video-engine` by bootstrap
+- **Channel config:** `projects/why-we-do-this/config.channel.json`
+- **OpenCut editor (separate):** `apps/` — do not mix with this pipeline unless asked

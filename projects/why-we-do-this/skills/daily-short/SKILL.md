@@ -8,8 +8,8 @@ description: Daily YouTube Short for Why We Do This — generate, render, upload
 ## Steps
 
 0. CoS handoff enabled → run `skills/cos-inbox/SKILL.md` (check `icojerrel-opencut@agentmail.to`, reply to CoS if needed).
-1. `bash /workspace/.cursor/automations/youtube-shorts/bootstrap.sh`
-2. `cd /workspace/faceless-video-engine`
+1. `bash /workspace/projects/why-we-do-this/bootstrap.sh`
+2. `cd /workspace/projects/why-we-do-this/faceless-video-engine`
 3. Run recovery first: `python3 run_daily.py --recover-only || true`
 4. Full pipeline: `python3 run_daily.py`
 5. If upload fails due to missing OAuth, rerun with `--no-upload`, report the output path, and note that `authorize.py` is needed.

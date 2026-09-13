@@ -3,6 +3,6 @@
   "repositoryDependencies": [
     "https://github.com/Mystery-CLI/faceless-video-engine"
   ],
-  "install": "bash .cursor/automations/youtube-shorts/bootstrap.sh",
+  "install": "bash projects/why-we-do-this/bootstrap.sh",
   "terminals": []
 }
