@@ -3,6 +3,17 @@
   "repositoryDependencies": [
     "https://github.com/Mystery-CLI/faceless-video-engine"
   ],
-  "install": "bash .cursor/automations/youtube-shorts/bootstrap.sh",
-  "terminals": []
+  "install": "bash projects/why-we-do-this/bootstrap.sh",
+  "terminals": [],
+  "secrets": [
+    "GEMINI_API_KEY",
+    "PEXELS_API_KEY",
+    "YOUTUBE_API_KEY",
+    "YOUTUBE_CLIENT_SECRET_JSON",
+    "YOUTUBE_TOKEN_JSON",
+    "AGENTMAIL_API_KEY",
+    "COS_GROKBOT_WEBHOOK_URL",
+    "COS_GROKBOT_WEBHOOK_KEY",
+    "COS_GROKBOT_WEBHOOK_BEARER"
+  ]
 }

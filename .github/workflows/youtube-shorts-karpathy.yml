@@ -27,13 +27,13 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-        run: bash .cursor/automations/youtube-shorts/bootstrap.sh
+        run: bash projects/why-we-do-this/bootstrap.sh
 
       - name: Run Karpathy autoresearch loop
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          cd faceless-video-engine
+          cd projects/why-we-do-this/faceless-video-engine
           python3 run_karpathy_loop.py
 
       - name: Upload review packet
@@ -41,5 +41,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: karpathy-review-${{ github.run_id }}
-          path: faceless-video-engine/data/karpathy_review/
+          path: projects/why-we-do-this/faceless-video-engine/data/karpathy_review/
           if-no-files-found: ignore
