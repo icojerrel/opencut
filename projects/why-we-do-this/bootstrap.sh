@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
-# Prepare faceless-video-engine for a Cloud Agent automation run.
+# Prepare faceless-video-engine for Why We Do This automation runs.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-PACK="$ROOT/automations/youtube-shorts"
-ENGINE="${FACELESS_ENGINE_DIR:-/workspace/faceless-video-engine}"
+PROJECT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENGINE="${FACELESS_ENGINE_DIR:-$PROJECT/faceless-video-engine}"
+LEGACY="/workspace/faceless-video-engine"
+
+if [[ ! -d "$ENGINE/.git" && -d "$LEGACY/.git" ]]; then
+  echo "Migrating legacy engine from $LEGACY"
+  mv "$LEGACY" "$ENGINE"
+fi
 
 if [[ ! -d "$ENGINE/.git" ]]; then
   git clone --depth 1 https://github.com/Mystery-CLI/faceless-video-engine.git "$ENGINE"
@@ -18,10 +23,10 @@ else
   (cd "$ENGINE/remotion" && npm install --silent)
 fi
 
-cp "$PACK/config.channel.json" "$ENGINE/config.json"
-cp "$PACK/overlay/run_karpathy_loop.py" "$PACK/overlay/run_daily.py" "$ENGINE/"
-cp "$PACK/overlay/src/"*.py "$ENGINE/src/"
-cp "$PACK/overlay/remotion/src/ShortVideo.tsx" "$ENGINE/remotion/src/"
+cp "$PROJECT/config.channel.json" "$ENGINE/config.json"
+cp "$PROJECT/overlay/run_karpathy_loop.py" "$PROJECT/overlay/run_daily.py" "$ENGINE/"
+cp "$PROJECT/overlay/src/"*.py "$ENGINE/src/"
+cp "$PROJECT/overlay/remotion/src/ShortVideo.tsx" "$ENGINE/remotion/src/"
 
 mkdir -p "$ENGINE/logs" "$ENGINE/data" "$ENGINE/output"
 touch "$ENGINE/.env"
