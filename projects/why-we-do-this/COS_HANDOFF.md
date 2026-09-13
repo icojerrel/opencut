@@ -118,8 +118,28 @@ reply_to_message
 
 ---
 
+## Grokbot wake webhook (AgentMail → Grokbot)
+
+When CoS should wake on incoming mail, register **one** AgentMail webhook:
+
+| Field | Env var | AgentMail API field |
+|-------|---------|---------------------|
+| Grokbot URL | `COS_GROKBOT_WEBHOOK_URL` | `url` |
+| Key header value | `COS_GROKBOT_WEBHOOK_KEY` | `headers` (default header name `X-Webhook-Key`) |
+| Bearer token | `COS_GROKBOT_WEBHOOK_BEARER` | `headers.Authorization` |
+
+```bash
+python3 projects/why-we-do-this/scripts/setup_cos_webhook.py
+```
+
+- Event: `message.received`
+- Inbox scope: `icojerrel-cos@agentmail.to`
+- Never commit or paste secret values in chat — use Cursor environment secrets only.
+- After create: send one test mail **to** `icojerrel-cos@agentmail.to` from `icojerrel-opencut@agentmail.to`.
+
 ## Related
 
+- Webhook script: `scripts/setup_cos_webhook.py`
 - Inbox loop skill: `skills/cos-inbox/SKILL.md`
 - Agent rules: `FOR_AGENTS.md`
 - Channel config: `config.channel.json`
