@@ -15,7 +15,7 @@ Three scheduled Cursor Automations replace local cron for the psychology Shorts 
 3. Work in `/workspace/faceless-video-engine` after bootstrap.
 4. Never commit secrets. API keys come from Cloud Agent environment secrets.
 5. YouTube OAuth (`client_secret.json`, `token.json`) must exist in the engine root for uploads; skip upload gracefully if missing.
-6. CoS handoff (when enabled): send **from** `icojerrel-opencut@agentmail.to` **to** `icojerrel-cos@agentmail.to`. Never send from the CoS inbox — Grokbot only sees **incoming** mail. See `COS_HANDOFF.md`.
+6. **CoS two-way email** (when enabled): at run start, follow `skills/cos-inbox/SKILL.md` — read `icojerrel-opencut@agentmail.to`, process CoS replies, then send/reply **to** `icojerrel-cos@agentmail.to`. Never send from the CoS inbox. See `COS_HANDOFF.md`.
 7. Do not disable `karpathy.auto_apply` or change upload privacy without explicit user instruction.
 
 ## Repository

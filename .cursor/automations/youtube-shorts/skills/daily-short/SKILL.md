@@ -7,6 +7,7 @@ description: Daily YouTube Short for Why We Do This — generate, render, upload
 
 ## Steps
 
+0. CoS handoff enabled → run `skills/cos-inbox/SKILL.md` (check `icojerrel-opencut@agentmail.to`, reply to CoS if needed).
 1. `bash /workspace/.cursor/automations/youtube-shorts/bootstrap.sh`
 2. `cd /workspace/faceless-video-engine`
 3. Run recovery first: `python3 run_daily.py --recover-only || true`

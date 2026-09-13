@@ -7,6 +7,7 @@ description: Weekly long-form psychology countdown video.
 
 ## Steps
 
+0. CoS handoff enabled → run `skills/cos-inbox/SKILL.md`.
 1. `bash /workspace/.cursor/automations/youtube-shorts/bootstrap.sh`
 2. `cd /workspace/faceless-video-engine`
 3. `python3 run_weekly.py`

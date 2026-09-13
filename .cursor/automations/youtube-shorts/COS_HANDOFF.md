@@ -1,52 +1,125 @@
-# CoS / Grokbot email handoff
+# CoS / Grokbot — tweerichtings email
 
-## Problem this fixes
+## Het probleem (opgelost)
 
-Mail **from** `icojerrel-cos@agentmail.to` **to** Gmail never lands in the CoS inbox. Grokbot reads **incoming** mail at `icojerrel-cos@agentmail.to`; outbound mail from that address is invisible to CoS.
+| Fout patroon | Gevolg |
+|--------------|--------|
+| Mail **van** `icojerrel-cos@` **naar** Gmail | CoS ziet niets in eigen inbox |
+| CoS antwoordt alleen naar Gmail | OpenCut ziet geen reply |
+| `replyAll` op oude mixed threads | Verkeerde ontvangers, topics vermengd |
 
-## Correct topology
+## Correcte topologie (tweerichtings)
 
-| Role | Inbox | Direction |
-|------|-------|-----------|
-| **OpenCut Agent** (this automation) | `icojerrel-opencut@agentmail.to` | Sends **to** CoS |
-| **Chief of Staff / Grokbot** | `icojerrel-cos@agentmail.to` | Receives, replies |
-| **Human (optional CC)** | `icojerrel@gmail.com` | CC on important handoffs only |
+```
+┌─────────────────────┐         send          ┌─────────────────────┐
+│  OpenCut Agent      │ ────────────────────► │  CoS / Grokbot      │
+│  icojerrel-opencut@ │ ◄──────────────────── │  icojerrel-cos@     │
+└─────────────────────┘         reply         └─────────────────────┘
+         ▲                                              ▲
+         │ leest incoming                             │ leest incoming
+         └──────────────────────────────────────────────┘
+```
 
-One inbox per agent — never send handoff mail **from** the CoS inbox.
+| Rol | Inbox | Leest | Verstuurt naar |
+|-----|-------|-------|----------------|
+| **OpenCut Agent** | `icojerrel-opencut@agentmail.to` | CoS-replies | `icojerrel-cos@agentmail.to` |
+| **CoS / Grokbot / Manager X** | `icojerrel-cos@agentmail.to` | OpenCut-vragen | `icojerrel-opencut@agentmail.to` |
+| **Human (optioneel CC)** | `icojerrel@gmail.com` | — | alleen bij expliciet verzoek |
 
-## Sending rules
+**Regel:** één inbox per agent. Handoff-mail nooit **from** de CoS-inbox.
 
-1. **From:** always `icojerrel-opencut@agentmail.to`
-2. **To:** `icojerrel-cos@agentmail.to`
-3. **Subject:** use a fresh, scannable prefix — e.g. `[OpenCut → CoS] <topic>`
-4. **Do not** `replyAll` on old CoS threads unless continuing the exact same topic
-5. **CC** `icojerrel@gmail.com` only when the user asked for human visibility
-6. Tag CoS/Grokbot in the body: `@Grokbot` or `Manager X` when X/social is involved
-7. Never put API keys or secrets in email
+---
 
-## Subject conventions
+## Voor OpenCut Agent (elke run)
 
-| Prefix | Use when |
-|--------|----------|
-| `[OpenCut → CoS]` | General handoff, questions, status |
-| `[OpenCut → CoS] URGENT` | Blocker needs human/CoS action today |
-| `[OpenCut → CoS] ACK` | Confirming receipt of CoS instruction |
+1. Voer `skills/cos-inbox/SKILL.md` uit **vóór** pipeline-werk.
+2. Verwerk unread mail van `icojerrel-cos@agentmail.to`.
+3. Antwoord in-thread via `reply_to_message` from `icojerrel-opencut@`.
+4. Label afgehandelde berichten `processed`.
 
-## What CoS should see
+---
 
-After a correct send, the message appears in the CoS inbox with label `received` and sender `OpenCut Agent <icojerrel-opencut@agentmail.to>`.
+## Voor CoS / Grokbot (configuratie)
 
-## Example (MCP)
+Grokbot moet:
+
+1. **Inbox polling:** `icojerrel-cos@agentmail.to` lezen op unread/received.
+2. **Antwoorden naar:** `icojerrel-opencut@agentmail.to` (niet alleen Gmail).
+3. **Subject:** `[CoS → OpenCut] <topic>` of reply in bestaande thread.
+4. **Inhoud:** ACK + instructies + blockers. Tag `@Grokbot` / Manager X waar relevant.
+5. **Geen secrets** in mail — verwijs naar vault/secret-card.
+
+### Voorbeeld CoS-reply
+
+```
+To: icojerrel-opencut@agentmail.to
+Subject: Re: [OpenCut → CoS] X-account intel + Twitter posts — ACK gevraagd
+
+[CoS → OpenCut] ACK
+
+1. X handle: @WhyWeDoThisPsy — 847 followers, analytics in vault entry "x-wwdt"
+2. Posts A–D: draft only until user approves live posting
+3. Cross-promo: Short teaser on X OK; no YouTube link in first 30 days
+
+— Chief of Staff
+```
+
+---
+
+## Subject-prefixen
+
+| Richting | Prefix | Wanneer |
+|----------|--------|---------|
+| OpenCut → CoS | `[OpenCut → CoS]` | Vragen, status, handoff |
+| CoS → OpenCut | `[CoS → OpenCut]` | Antwoorden, instructies |
+| Urgent | `… URGENT` | Blocker vandaag |
+
+---
+
+## Verificatie
+
+**OpenCut → CoS gelukt** als CoS-inbox toont:
+- label `received` + `unread`
+- sender `OpenCut Agent <icojerrel-opencut@agentmail.to>`
+
+**CoS → OpenCut gelukt** als OpenCut-inbox toont:
+- label `received` + `unread`
+- sender `Chief of Staff <icojerrel-cos@agentmail.to>`
+
+---
+
+## MCP-voorbeelden
+
+**OpenCut vraagt CoS:**
 
 ```
 send_message
   inboxId: icojerrel-opencut@agentmail.to
   to: ["icojerrel-cos@agentmail.to"]
-  subject: "[OpenCut → CoS] X-account intel — ACK gevraagd"
-  text: ...
+  subject: "[OpenCut → CoS] <topic>"
 ```
+
+**OpenCut antwoordt op CoS:**
+
+```
+reply_to_message
+  inboxId: icojerrel-opencut@agentmail.to
+  messageId: <cos message id>
+  to: ["icojerrel-cos@agentmail.to"]
+```
+
+---
+
+## Actieve threads (referentie)
+
+| Thread ID | Onderwerp | Status |
+|-----------|-----------|--------|
+| `53935ad9-427a-48f8-a71d-88b41f4a2a08` | X-account intel + Twitter posts | wacht op CoS ACK |
+
+---
 
 ## Related
 
-- Channel config: `config.channel.json`
+- Inbox loop skill: `skills/cos-inbox/SKILL.md`
 - Agent rules: `FOR_AGENTS.md`
+- Channel config: `config.channel.json`

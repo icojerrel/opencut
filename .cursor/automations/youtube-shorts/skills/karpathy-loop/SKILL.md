@@ -7,6 +7,7 @@ description: Nightly Karpathy autoresearch — one config experiment per run.
 
 ## Steps
 
+0. CoS handoff enabled → run `skills/cos-inbox/SKILL.md`.
 1. `bash /workspace/.cursor/automations/youtube-shorts/bootstrap.sh`
 2. `cd /workspace/faceless-video-engine`
 3. If `data/baseline_plan.json` is missing, run one `--no-upload` daily build first to seed it, then continue.
