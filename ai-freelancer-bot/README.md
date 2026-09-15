@@ -24,7 +24,7 @@ Bereikbaar via **Web Chat** en **Slack**.
 | Kanaal | Setup |
 |--------|-------|
 | Web Chat | `npm run dev` → localhost:3000 |
-| Slack | Zie [docs/SLACK_SETUP.md](./docs/SLACK_SETUP.md) |
+| Slack | Zie [SLACK_SETUP.md](./SLACK_SETUP.md) |
 
 ## Vereisten
 
@@ -96,7 +96,7 @@ agent/
     ├── job-sources.ts  # Live job fetchers
     └── store.ts        # Session state
 app/                    # Next.js web chat
-docs/SLACK_SETUP.md
+SLACK_SETUP.md
 ```
 
 ## Deploy

@@ -162,7 +162,6 @@ export async function fetchJobicyJobs(query: string, limit: number): Promise<Liv
 
 export async function fetchArbeitnowJobs(query: string, limit: number): Promise<LiveJobResult[]> {
   const data = await fetchJson<{ data: Array<Record<string, unknown>> }>("https://arbeitnow.com/api/job-board-api");
-  const q = query.toLowerCase();
 
   return (data.data ?? [])
     .filter((job) => matchesQuery(String(job.title), `${job.description} ${job.tags}`, query))
