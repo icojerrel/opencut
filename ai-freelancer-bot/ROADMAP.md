@@ -1,69 +1,58 @@
 # FreelanceBot — Roadmap
 
-We bouwen **incrementeel**: elk stadium is een werkend product.
+Incrementeel bouwen: elk stadium is een werkend product.
 
-## v0.1 — MVP (huidige versie)
+## v0.1 — MVP ✅
 
-**Doel:** Profiel → jobs vinden → proposal schrijven.
+Profiel → jobs → proposal.
+
+## v0.2 — Tarieven & eigen jobs ✅ (huidige versie)
 
 | Component | Status |
 |-----------|--------|
-| Web chat | ✅ |
-| `manage_profile` | ✅ |
-| `search_jobs` | ✅ |
-| `save_proposal` | ✅ |
-| Skill: proposal-writing | ✅ |
-| 3 seed jobs | ✅ |
+| `calculate_rate` | ✅ |
+| `add_job` | ✅ |
+| Skill: pricing-strategy | ✅ |
 
-**Test:** *"Ik ben Next.js developer, €85/uur. Welke jobs passen? Schrijf een proposal voor job-001."*
-
----
-
-## v0.2 — Tarieven & eigen jobs
-
-- `calculate_rate` — uurtarief berekenen
-- `add_job` — opdrachten handmatig toevoegen
-- Skill: pricing-strategy
-
-Code klaar in `future/tools/` en `future/skills/`.
+**Test:** *"Voeg een LinkedIn job toe. Wat moet ik vragen voor een medium AI project? Schrijf een proposal."*
 
 ---
 
 ## v0.3 — Projecten & facturen
 
-- `track_project` — uren en deadlines
-- `generate_invoice` — factuur genereren
+- `track_project`
+- `generate_invoice`
 - Skill: client-communication
+
+Code in `future/tools/` en `future/skills/`.
 
 ---
 
 ## v0.4 — Live job feeds
 
-- `fetch_live_jobs` — Remotive, RemoteOK, Jobicy, Upwork
-- Import naar lokale job board
+- `fetch_live_jobs` (Remotive, RemoteOK, Jobicy, Upwork)
 
-Code klaar in `future/lib/job-sources.ts` en `future/tools/fetch_live_jobs.ts`.
+Code in `future/lib/job-sources.ts`.
 
 ---
 
 ## v0.5 — Slack
 
-- Slack channel voor @mentions en DMs
-- Setup: `future/docs/SLACK_SETUP.md`
+Code in `future/channels/slack.ts` + `future/SLACK_SETUP.md`.
 
 ---
 
 ## v0.6 — Video editing niche
 
-- `quote_video_project` — video offertes
+- `quote_video_project`
 - Skill: video-editing-freelance
-- Extra seed jobs
 
 ---
 
-## Hoe een fase activeren
+## Fase activeren
 
-1. Verplaats bestanden van `future/` terug naar `agent/`
-2. Update `agent/instructions.md`
-3. Run `npm run test`
-4. Update dit roadmap-document
+```bash
+mv future/tools/<tool>.ts agent/tools/
+mv future/skills/<skill> agent/skills/
+# Update instructions.md, npm run test, ROADMAP.md
+```

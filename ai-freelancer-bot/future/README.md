@@ -1,14 +1,14 @@
-# Future features (nog niet actief)
+# Future features (v0.3+)
 
-Deze code is **klaar maar uitgeschakeld**. eve laadt alleen bestanden onder `agent/`.
+Code klaar maar **niet actief**. eve laadt alleen `agent/`.
 
-Om een feature te activeren, verplaats de bestanden terug:
+| Versie | Bestanden |
+|--------|-----------|
+| v0.3 | `tools/track_project.ts`, `tools/generate_invoice.ts`, `skills/client-communication/` |
+| v0.4 | `lib/job-sources.ts`, `tools/fetch_live_jobs.ts` |
+| v0.5 | `channels/slack.ts`, `SLACK_SETUP.md` |
+| v0.6 | `tools/quote_video_project.ts`, `skills/video-editing-freelance/` |
 
-```bash
-# Voorbeeld: v0.2 tarieven
-mv future/tools/calculate_rate.ts agent/tools/
-mv future/tools/add_job.ts agent/tools/
-mv future/skills/pricing-strategy agent/skills/
-```
+Activeren: verplaats naar `agent/`, update `instructions.md`, run `npm run test`.
 
-Zie [ROADMAP.md](../ROADMAP.md) voor de volgorde.
+Zie [ROADMAP.md](../ROADMAP.md).

@@ -1,68 +1,58 @@
-# FreelanceBot (v0.1 MVP)
+# FreelanceBot (v0.2)
 
-Een **simpele** AI-assistent voor freelancers. Drie stappen:
+AI-assistent voor freelancers. Vier stappen:
 
-1. **Profiel** instellen (skills, tarief)
-2. **Opdrachten** vinden die passen
-3. **Proposal** schrijven die je direct kunt versturen
+1. **Profiel** instellen
+2. **Opdrachten** vinden of toevoegen
+3. **Tarief** berekenen
+4. **Proposal** schrijven
 
 Gebouwd met [eve](https://eve.dev) + Next.js web chat.
 
-## Wat zit erin (MVP)
+## Tools (v0.2)
 
-| Tool | Wat het doet |
-|------|--------------|
+| Tool | Functie |
+|------|---------|
 | `manage_profile` | Profiel bekijken/bijwerken |
 | `search_jobs` | Opdrachten zoeken en matchen |
+| `add_job` | Opdracht handmatig toevoegen |
+| `calculate_rate` | Uurtarief berekenen |
 | `save_proposal` | Proposal opslaan |
 
-Meer features komen later — zie [ROADMAP.md](./ROADMAP.md).
+Skills: `proposal-writing`, `pricing-strategy`
+
+Volgende fases: [ROADMAP.md](./ROADMAP.md)
 
 ## Starten
 
 ```bash
-fnm use 24          # Node.js 24+
+fnm use 24
 cd ai-freelancer-bot
 npm install
-npm run dev:eve     # eve server → :2000
-npm run dev         # web UI  → :3000
+npm run dev:eve     # :2000
+npm run dev         # :3000
 ```
 
-Zet `AI_GATEWAY_API_KEY` in `.env.local` voor live AI-antwoorden.
+`AI_GATEWAY_API_KEY` in `.env.local` voor live AI-antwoorden.
 
 ## Testen
 
 ```bash
-npm run typecheck
-npm run test
+npm run typecheck && npm run test
 ```
 
 ## Voorbeeldgesprek
 
 ```
-Jij:    Ik ben senior Next.js developer, 5 jaar ervaring, €85/uur
-Bot:    [stelt profiel in]
+Jij:    Ik ben Next.js developer, 5 jaar, €85/uur
+Bot:    [profiel opgeslagen]
 
-Jij:    Welke opdrachten passen bij mij?
-Bot:    [toont gematchte jobs met scores]
+Jij:    Welke jobs passen? En wat moet ik vragen voor job-002?
+Bot:    [matches + tariefadvies via calculate_rate]
 
-Jij:    Schrijf een proposal voor job-001
-Bot:    [genereert proposal, slaat op, klaar om te copy-pasten]
+Jij:    Ik vond een job op LinkedIn: "React dashboard, €70/uur, klant Acme"
+Bot:    [add_job → search_jobs]
+
+Jij:    Schrijf proposal voor die job
+Bot:    [proposal klaar om te versturen]
 ```
-
-## Structuur
-
-```
-agent/
-├── instructions.md
-├── tools/           # 3 tools (MVP)
-├── skills/          # proposal-writing
-└── lib/             # state + 3 seed jobs
-app/                 # web chat
-future/              # code voor v0.2+ (nog niet actief)
-ROADMAP.md
-```
-
-## Volgende stap
-
-v0.2 voegt tariefberekening en handmatig jobs toevoegen toe. Zie [ROADMAP.md](./ROADMAP.md).
