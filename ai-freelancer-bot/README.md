@@ -1,81 +1,107 @@
-# AI Freelancer Bot
+# AI Freelancer Bot (FreelanceBot)
 
-Een AI-assistent voor freelancers, gebouwd met [eve](https://eve.dev). Helpt met opdrachten zoeken, proposals schrijven, tarieven berekenen, projecten bijhouden en facturen genereren.
+Een AI-assistent voor freelancers, gebouwd met [eve](https://eve.dev). Helpt met **live opdrachten zoeken**, proposals schrijven, tarieven berekenen, video-project offertes, projectbeheer en facturatie.
+
+Bereikbaar via **Web Chat** en **Slack**.
 
 ## Features
 
 | Feature | Tool / Skill |
 |---------|--------------|
-| Opdrachten zoeken & matchen | `search_jobs` |
+| **Live opdrachten** (Remotive, RemoteOK, Jobicy, Upwork) | `fetch_live_jobs` |
+| Lokale opdrachten zoeken & matchen | `search_jobs` |
 | Opdracht toevoegen | `add_job` |
 | Proposals schrijven | `proposal-writing` + `save_proposal` |
 | Tarief berekenen | `pricing-strategy` + `calculate_rate` |
+| **Video project offertes** | `video-editing-freelance` + `quote_video_project` |
 | Profiel beheren | `manage_profile` |
 | Projecten tracken | `track_project` |
 | Facturen genereren | `generate_invoice` |
 | Klantcommunicatie | `client-communication` |
 
+## Kanalen
+
+| Kanaal | Setup |
+|--------|-------|
+| Web Chat | `npm run dev` → localhost:3000 |
+| Slack | Zie [docs/SLACK_SETUP.md](./docs/SLACK_SETUP.md) |
+
 ## Vereisten
 
 - Node.js **24+**
-- AI Gateway model (standaard: `openai/gpt-5.6-luna-fast`)
+- `AI_GATEWAY_API_KEY` voor live AI-antwoorden
+- `SLACK_BOT_TOKEN` + `SLACK_SIGNING_SECRET` voor Slack (optioneel)
 
 ## Starten
 
 ```bash
-# Node 24 (via fnm)
 fnm use 24
-
 cd ai-freelancer-bot
 npm install
-npm run dev          # Terminal REPL + eve server
+npm run dev:eve     # eve server → :2000
+npm run dev         # web UI → :3000
 ```
 
-Web chat UI (Next.js):
+## Testen
 
 ```bash
-npm run dev          # eve dev start ook de Next.js app
-# Open http://localhost:3000
+npm run typecheck
+npm run test        # core + video + live job fetch
 ```
 
-## API (HTTP)
+## Live job bronnen
 
-```bash
-# Session aanmaken
-curl -X POST http://localhost:3000/eve/v1/session
+`fetch_live_jobs` haalt opdrachten op van:
 
-# Bericht sturen
-curl -X POST http://localhost:3000/eve/v1/session/<sessionId> \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Zoek Next.js opdrachten voor mij"}'
-```
+- **Remotive** — remote jobs API
+- **RemoteOK** — remote dev/creative jobs
+- **Jobicy** — remote jobs met tags
+- **Arbeitnow** — EU/remote job board
+- **Upwork** — RSS feed (kan geblokkeerd zijn door Cloudflare; graceful fallback)
 
-## Voorbeeldgesprekken
+## Video editing niche
 
-- *"Stel mijn profiel in: ik ben een senior Next.js developer, 8 jaar ervaring, €95/uur"*
-- *"Welke opdrachten passen bij mijn profiel?"*
-- *"Schrijf een proposal voor job-001"*
-- *"Wat moet ik vragen voor een 40-uur AI integratie project?"*
-- *"Maak een factuur voor TechFlow: 32 uur × €95"*
+4 extra seed jobs + dedicated skill voor:
+- YouTube Shorts / Reels editing
+- Faceless automation (Remotion, FFmpeg)
+- Corporate / color grading
+- Podcast clip packs
+
+## Voorbeeld prompts
+
+**Algemeen:**
+- *"Stel mijn profiel in: video editor, Remotion + Premiere, €75/uur"*
+- *"Haal live video editing opdrachten op en importeer ze"*
+- *"Schrijf een proposal voor job-006"*
+
+**Video:**
+- *"Bereken offerte voor 5 YouTube Shorts per week, premium, met captions"*
+- *"Wat moet ik vragen voor een faceless Remotion pipeline setup?"*
+
+**Slack:**
+- `@FreelanceBot live jobs voor remotion developer`
+- `@FreelanceBot quote 3 corporate videos met motion graphics`
 
 ## Architectuur
 
 ```
 agent/
-├── instructions.md      # Systeemprompt (NL)
-├── agent.ts             # Model config
-├── tools/               # 7 typed tools
-├── skills/              # 3 load-on-demand skills
-└── lib/                 # State store + types
-app/                     # Next.js web chat (eve channel/web)
+├── instructions.md
+├── channels/
+│   ├── eve.ts          # HTTP API
+│   └── slack.ts        # Slack integratie
+├── tools/              # 9 tools
+├── skills/             # 4 skills
+└── lib/
+    ├── job-sources.ts  # Live job fetchers
+    └── store.ts        # Session state
+app/                    # Next.js web chat
+docs/SLACK_SETUP.md
 ```
-
-Data wordt per sessie bewaard via eve `defineState` — profiel, opdrachten, proposals, projecten en facturen blijven beschikbaar tijdens het gesprek.
 
 ## Deploy
 
 ```bash
+npx eve link
 npm run deploy
 ```
-
-Vereist een gekoppeld Vercel-project (`eve link`).

@@ -14,6 +14,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test:core": "node --experimental-strip-types scripts/test-core.mjs",
+    "test:live": "node --experimental-strip-types scripts/test-live-jobs.mjs",
+    "test:video": "node --experimental-strip-types scripts/test-video-quote.mjs",
+    "test": "npm run test:core && npm run test:video && npm run test:live",
     "build:eve": "eve build",
     "dev:eve": "eve dev",
     "start:eve": "eve start"
@@ -28,7 +31,7 @@
     "@streamdown/math": "^1.0.2",
     "@streamdown/mermaid": "^1.0.2",
     "@tailwindcss/postcss": "^4.3.0",
-    "@vercel/connect": "1.0.0",
+    "@vercel/connect": "^2.1.0",
     "ai": "^7.0.93",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -52,6 +55,7 @@
     "@types/node": "^26.6.0",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
+    "microsandbox": "^0.5.10",
     "typescript": "^6.0.3"
   },
   "engines": {
