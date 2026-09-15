@@ -1,27 +1,25 @@
-# FreelanceBot (v0.2)
+# FreelanceBot v1.0
 
-AI-assistent voor freelancers. Vier stappen:
+Complete AI-assistent voor freelancers — gebouwd met [eve](https://eve.dev).
 
-1. **Profiel** instellen
-2. **Opdrachten** vinden of toevoegen
-3. **Tarief** berekenen
-4. **Proposal** schrijven
+## Features
 
-Gebouwd met [eve](https://eve.dev) + Next.js web chat.
+| Categorie | Tools / Skills |
+|-----------|----------------|
+| Profiel | `manage_profile` |
+| Opdrachten | `search_jobs`, `add_job`, `fetch_live_jobs` |
+| Tarieven | `calculate_rate`, `pricing-strategy` |
+| Proposals | `save_proposal`, `proposal-writing` |
+| Projecten | `track_project` |
+| Facturen | `generate_invoice`, `client-communication` |
+| Video | `quote_video_project`, `video-editing-freelance` |
 
-## Tools (v0.2)
+## Kanalen
 
-| Tool | Functie |
-|------|---------|
-| `manage_profile` | Profiel bekijken/bijwerken |
-| `search_jobs` | Opdrachten zoeken en matchen |
-| `add_job` | Opdracht handmatig toevoegen |
-| `calculate_rate` | Uurtarief berekenen |
-| `save_proposal` | Proposal opslaan |
-
-Skills: `proposal-writing`, `pricing-strategy`
-
-Volgende fases: [ROADMAP.md](./ROADMAP.md)
+| Kanaal | Start |
+|--------|-------|
+| Web chat | `npm run dev` → localhost:3000 |
+| Slack | [SLACK_SETUP.md](./SLACK_SETUP.md) |
 
 ## Starten
 
@@ -29,30 +27,33 @@ Volgende fases: [ROADMAP.md](./ROADMAP.md)
 fnm use 24
 cd ai-freelancer-bot
 npm install
-npm run dev:eve     # :2000
-npm run dev         # :3000
-```
 
-`AI_GATEWAY_API_KEY` in `.env.local` voor live AI-antwoorden.
+# .env.local
+# AI_GATEWAY_API_KEY=...
+# SLACK_BOT_TOKEN=...        (optioneel)
+# SLACK_SIGNING_SECRET=...   (optioneel)
+
+npm run dev:eve    # :2000
+npm run dev        # :3000
+```
 
 ## Testen
 
 ```bash
-npm run typecheck && npm run test
+npm run typecheck
+npm run test       # core + video + live
 ```
 
-## Voorbeeldgesprek
+## Roadmap
 
-```
-Jij:    Ik ben Next.js developer, 5 jaar, €85/uur
-Bot:    [profiel opgeslagen]
+Alle fases afgerond — zie [ROADMAP.md](./ROADMAP.md).
 
-Jij:    Welke jobs passen? En wat moet ik vragen voor job-002?
-Bot:    [matches + tariefadvies via calculate_rate]
-
-Jij:    Ik vond een job op LinkedIn: "React dashboard, €70/uur, klant Acme"
-Bot:    [add_job → search_jobs]
-
-Jij:    Schrijf proposal voor die job
-Bot:    [proposal klaar om te versturen]
-```
+| Versie | Focus |
+|--------|-------|
+| v0.1 | MVP |
+| v0.2 | Tarieven & jobs |
+| v0.3 | Projecten & facturen |
+| v0.4 | Live feeds |
+| v0.5 | Slack |
+| v0.6 | Video niche |
+| **v1.0** | **Compleet** |

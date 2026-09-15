@@ -1,58 +1,50 @@
 # FreelanceBot — Roadmap
 
-Incrementeel bouwen: elk stadium is een werkend product.
+Alle fases zijn **afgerond**. Het product is feature-complete v1.0.
 
 ## v0.1 — MVP ✅
 
-Profiel → jobs → proposal.
+Profiel → jobs zoeken → proposal schrijven.
 
-## v0.2 — Tarieven & eigen jobs ✅ (huidige versie)
+- `manage_profile`, `search_jobs`, `save_proposal`
+- Skill: `proposal-writing`
 
-| Component | Status |
-|-----------|--------|
-| `calculate_rate` | ✅ |
-| `add_job` | ✅ |
-| Skill: pricing-strategy | ✅ |
+## v0.2 — Tarieven & eigen jobs ✅
 
-**Test:** *"Voeg een LinkedIn job toe. Wat moet ik vragen voor een medium AI project? Schrijf een proposal."*
+- `calculate_rate`, `add_job`
+- Skill: `pricing-strategy`
 
----
+## v0.3 — Projecten & facturen ✅
 
-## v0.3 — Projecten & facturen
+- `track_project`, `generate_invoice`
+- Skill: `client-communication`
 
-- `track_project`
-- `generate_invoice`
-- Skill: client-communication
+## v0.4 — Live job feeds ✅
 
-Code in `future/tools/` en `future/skills/`.
+- `fetch_live_jobs` — Remotive, RemoteOK, Jobicy, Arbeitnow, Upwork RSS
 
----
+## v0.5 — Slack ✅
 
-## v0.4 — Live job feeds
+- `agent/channels/slack.ts`
+- Setup: [SLACK_SETUP.md](./SLACK_SETUP.md)
 
-- `fetch_live_jobs` (Remotive, RemoteOK, Jobicy, Upwork)
-
-Code in `future/lib/job-sources.ts`.
-
----
-
-## v0.5 — Slack
-
-Code in `future/channels/slack.ts` + `future/SLACK_SETUP.md`.
-
----
-
-## v0.6 — Video editing niche
+## v0.6 — Video editing niche ✅
 
 - `quote_video_project`
-- Skill: video-editing-freelance
+- Skill: `video-editing-freelance`
+- 3 video seed jobs (job-004 t/m job-006)
 
 ---
 
-## Fase activeren
+## v1.0 — Compleet
+
+**10 tools · 5 skills · 2 kanalen · 6 seed jobs**
 
 ```bash
-mv future/tools/<tool>.ts agent/tools/
-mv future/skills/<skill> agent/skills/
-# Update instructions.md, npm run test, ROADMAP.md
+npm run test   # alle tests
+npm run dev:eve && npm run dev
 ```
+
+### End-to-end voorbeeld
+
+> *"Profiel: video editor, Remotion + Premiere, €75/uur. Haal live video jobs op. Quote 5 Shorts/week. Schrijf proposal. Start project. Maak factuur 32u × €75."*
