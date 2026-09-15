@@ -48,3 +48,15 @@ npm run dev:eve && npm run dev
 ### End-to-end voorbeeld
 
 > *"Profiel: video editor, Remotion + Premiere, €75/uur. Haal live video jobs op. Quote 5 Shorts/week. Schrijf proposal. Start project. Maak factuur 32u × €75."*
+
+---
+
+## v2.0 — Toekomst (optioneel)
+
+| Feature | Beschrijving |
+|---------|--------------|
+| Persistente data | Profiel/jobs over sessies heen (database of file provider) |
+| Job alerts | Dagelijkse Slack/e-mail digest via eve schedules |
+| Evals | Automatische kwaliteitscheck op proposals |
+| Multi-user auth | Per gebruiker profiel en data |
+| Platform OAuth | Directe Upwork/Fiverr koppeling (indien API beschikbaar) |

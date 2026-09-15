@@ -23,18 +23,12 @@ Complete AI-assistent voor freelancers — gebouwd met [eve](https://eve.dev).
 
 ## Starten
 
+Zie [GETTING_STARTED.md](./GETTING_STARTED.md) voor de volledige gids.
+
 ```bash
-fnm use 24
-cd ai-freelancer-bot
-npm install
-
-# .env.local
-# AI_GATEWAY_API_KEY=...
-# SLACK_BOT_TOKEN=...        (optioneel)
-# SLACK_SIGNING_SECRET=...   (optioneel)
-
+fnm use 24 && cd ai-freelancer-bot && npm install
 npm run dev:eve    # :2000
-npm run dev        # :3000
+npm run dev        # :3000 → snelkoppelingen op homepage
 ```
 
 ## Testen

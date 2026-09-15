@@ -23,6 +23,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AgentMessage } from "./agent-message";
+import { QuickPrompts } from "./quick-prompts";
 
 const AGENT_NAME = "FreelanceBot";
 
@@ -78,6 +79,15 @@ export function AgentChat({
     void agent.cancel().catch((error: unknown) => {
       setCancellationError(toErrorMessage(error));
     });
+  };
+
+  const sendText = async (text: string) => {
+    const trimmed = text.trim();
+    if (trimmed.length === 0 || isResuming) return;
+    setHasInputText(false);
+    setCancellationError(undefined);
+    const options = isBusy ? { turnPolicy: "steer" as const } : undefined;
+    await agent.send(trimmed, options);
   };
 
   const handleSubmit = async (message: PromptInputMessage) => {
@@ -178,11 +188,14 @@ export function AgentChat({
         )}
       >
         {showConversationLayout ? null : (
-          <div className="flex flex-col items-center gap-3 text-center">
-            <h1 className="font-medium text-5xl tracking-tighter">{AGENT_NAME}</h1>
-            <p className="max-w-md text-muted-foreground text-sm">
-              Opdrachten, tarieven, proposals, projecten en facturen — alles-in-één.
-            </p>
+          <div className="flex flex-col items-center gap-6 text-center">
+            <div className="flex flex-col items-center gap-3">
+              <h1 className="font-medium text-5xl tracking-tighter">{AGENT_NAME}</h1>
+              <p className="max-w-md text-muted-foreground text-sm">
+                Opdrachten, tarieven, proposals, projecten en facturen — alles-in-één.
+              </p>
+            </div>
+            <QuickPrompts disabled={isBusy || isResuming} onSelect={sendText} />
           </div>
         )}
         <div className="w-full">{composer}</div>
@@ -231,8 +244,12 @@ function ErrorMessage({ message }: { readonly message: string }) {
         >
           <AlertCircleIcon className="mt-0.5 size-4 shrink-0 text-destructive" />
           <div>
-            <p className="font-medium">Request failed</p>
-            <p className="mt-0.5 text-muted-foreground">{message}</p>
+            <p className="font-medium">Verzoek mislukt</p>
+            <p className="mt-0.5 text-muted-foreground">
+              {message.includes("no credentials")
+                ? "AI Gateway credentials ontbreken. Zet AI_GATEWAY_API_KEY in .env.local."
+                : message}
+            </p>
           </div>
         </div>
       </MessageContent>
@@ -247,7 +264,7 @@ function ChatHeader({ canStartNewChat }: { readonly canStartNewChat: boolean }) 
         <span className="truncate text-muted-foreground text-sm">{AGENT_NAME}</span>
         {canStartNewChat ? (
           <Button
-            aria-label="Start a new chat"
+            aria-label="Nieuwe chat"
             className="pointer-events-auto fixed top-3 right-6 pr-4"
             onClick={() => window.location.assign("/s")}
             size="sm"
@@ -255,7 +272,7 @@ function ChatHeader({ canStartNewChat }: { readonly canStartNewChat: boolean }) 
             variant="ghost"
           >
             <PlusIcon className="size-4" />
-            <span className="hidden font-normal text-sm sm:inline">New chat</span>
+            <span className="hidden font-normal text-sm sm:inline">Nieuwe chat</span>
           </Button>
         ) : null}
       </div>
@@ -269,7 +286,7 @@ function PendingThinking() {
       <MessageContent>
         <div className="mb-4 flex w-full items-center gap-2 text-muted-foreground text-sm">
           <BrainIcon className="size-4" />
-          <Shimmer duration={1}>Thinking</Shimmer>
+          <Shimmer duration={1}>Bezig...</Shimmer>
         </div>
       </MessageContent>
     </Message>
