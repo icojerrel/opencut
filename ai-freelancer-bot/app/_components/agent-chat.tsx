@@ -181,7 +181,7 @@ export function AgentChat({
           <div className="flex flex-col items-center gap-3 text-center">
             <h1 className="font-medium text-5xl tracking-tighter">{AGENT_NAME}</h1>
             <p className="max-w-md text-muted-foreground text-sm">
-              Vind opdrachten, schrijf proposals, bereken tarieven en genereer facturen.
+              Stel je profiel in, vind passende opdrachten en schrijf proposals.
             </p>
           </div>
         )}

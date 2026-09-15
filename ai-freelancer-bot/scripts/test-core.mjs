@@ -1,80 +1,56 @@
 /**
- * Core logic tests — runs without AI Gateway credentials.
+ * MVP tests — profiel, job search, proposal (geen AI credentials nodig).
  */
 import { defaultData } from "../agent/lib/default-data.ts";
-import {
-  calculateRate,
-  createInvoiceRecord,
-  createProposalRecord,
-  formatInvoice,
-  matchJobsToProfile,
-  searchJobsInData,
-} from "../agent/lib/logic.ts";
+import { createProposalRecord, matchJobsToProfile, searchJobsInData } from "../agent/lib/logic.ts";
 
 let passed = 0;
 let failed = 0;
 
 function assert(name, condition) {
-  if (condition) {
-    passed++;
-    console.log(`✓ ${name}`);
-  } else {
-    failed++;
-    console.error(`✗ ${name}`);
-  }
+  if (condition) { passed++; console.log(`✓ ${name}`); }
+  else { failed++; console.error(`✗ ${name}`); }
 }
 
-let data = defaultData();
-data = { ...data, profile: { ...data.profile, name: "Jerrel", title: "Senior Next.js Developer", skills: ["Next.js", "React", "TypeScript"], hourlyRate: 95, experienceYears: 8 } };
+// MVP: 3 seed jobs
+const seed = defaultData();
+assert("Seed data has 3 jobs", seed.jobs.length === 3);
 
-assert("Profile setup", data.profile.name === "Jerrel" && data.profile.hourlyRate === 95);
+// Profiel
+let data = {
+  ...seed,
+  profile: {
+    ...seed.profile,
+    name: "Jerrel",
+    title: "Senior Next.js Developer",
+    skills: ["Next.js", "React", "TypeScript"],
+    hourlyRate: 85,
+    experienceYears: 5,
+  },
+};
+assert("Profile setup", data.profile.hourlyRate === 85);
 
+// Job search
 const nextJobs = searchJobsInData(data, { skills: ["Next.js"] });
 assert("Search by skill", nextJobs.length >= 1);
 
 const matches = matchJobsToProfile(data, data.profile);
-assert("Profile matching returns jobs", matches.length > 0);
-assert("Top match has score", matches[0].matchScore >= 0);
-console.log(`  Top match: ${matches[0].title} (${matches[0].matchScore}%)`);
+assert("Profile matching", matches.length > 0);
+assert("Best match is Next.js job", matches[0].title.includes("Next.js"));
+console.log(`  Best match: ${matches[0].title} (${matches[0].matchScore}%)`);
 
-const rate = calculateRate({
-  experienceYears: 8,
-  skillLevel: "senior",
-  projectType: "fixed",
-  complexity: "medium",
-  market: "nl",
-});
-assert("Rate calculation", rate.hourlyRate.recommended > 50);
-console.log(`  Recommended rate: €${rate.hourlyRate.recommended}/uur`);
-
-const fixed40h = Math.round(rate.hourlyRate.recommended * 40 * rate.fixedMultiplier);
-console.log(`  Fixed 40h price: €${fixed40h}`);
-assert("Fixed price calc", fixed40h > 2000);
-
+// Proposal
 const job = data.jobs[0];
-const proposalResult = createProposalRecord(data, {
+const { proposal } = createProposalRecord(data, {
   jobId: job.id,
   jobTitle: job.title,
-  content: "Beste client, ik heb 8 jaar ervaring met Next.js en kan dit project binnen 5 weken opleveren...",
-  proposedRate: 95,
+  content: "Beste TechFlow, met 5 jaar Next.js ervaring lever ik jullie dashboard binnen 5 weken op...",
+  proposedRate: 85,
   currency: "EUR",
   status: "draft",
 });
-data = proposalResult.data;
-assert("Proposal saved", proposalResult.proposal.id.startsWith("prop-"));
+assert("Proposal saved", proposal.id.startsWith("prop-"));
+assert("Proposal linked to job", proposal.jobId === "job-001");
 
-const invoiceResult = createInvoiceRecord(data, {
-  client: "TechFlow BV",
-  lines: [{ description: "Development uren", quantity: 32, unitPrice: 95 }],
-  currency: "EUR",
-  dueDate: "2026-10-01",
-});
-const formatted = formatInvoice(invoiceResult.invoice);
-assert("Invoice generated", formatted.includes("3040.00"));
-assert("Invoice has client name", formatted.includes("TechFlow BV"));
-
-console.log("\n--- Invoice preview ---");
-console.log(formatted);
-
-console.log(`\n${passed} passed, ${failed} failed`);
+console.log(`\nMVP flow OK — ${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

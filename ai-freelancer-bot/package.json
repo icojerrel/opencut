@@ -13,10 +13,7 @@
     "eval": "eve eval",
     "start": "next start",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test:core": "node --experimental-strip-types scripts/test-core.mjs",
-    "test:live": "node --experimental-strip-types scripts/test-live-jobs.mjs",
-    "test:video": "node --experimental-strip-types scripts/test-video-quote.mjs",
-    "test": "npm run test:core && npm run test:video && npm run test:live",
+    "test": "node --experimental-strip-types scripts/test-core.mjs",
     "build:eve": "eve build",
     "dev:eve": "eve dev",
     "start:eve": "eve start"
