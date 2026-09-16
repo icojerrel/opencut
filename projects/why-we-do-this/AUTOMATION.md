@@ -21,7 +21,7 @@ Open [cursor.com/automations/new](https://cursor.com/automations/new) and create
 |---|---|
 | **Trigger** | Scheduled — `0 7 * * *` (09:00 Europe/Amsterdam, CEST) |
 | **Repository** | icojerrel/opencut |
-| **Prompt** | Read `.cursor/automations/youtube-shorts/FOR_AGENTS.md` and follow `.cursor/automations/youtube-shorts/skills/daily-short/SKILL.md` for this run. |
+| **Prompt** | Read `projects/why-we-do-this/FOR_AGENTS.md` and follow `projects/why-we-do-this/skills/daily-short/SKILL.md` for this run. |
 | **Tools** | Memories (optional), MCP AgentMail if connected |
 
 ### 2. wwdt-karpathy-loop
@@ -30,7 +30,7 @@ Open [cursor.com/automations/new](https://cursor.com/automations/new) and create
 |---|---|
 | **Trigger** | Scheduled — `0 21 * * *` (23:00 Europe/Amsterdam, CEST) |
 | **Repository** | icojerrel/opencut |
-| **Prompt** | Read `.cursor/automations/youtube-shorts/FOR_AGENTS.md` and follow `.cursor/automations/youtube-shorts/skills/karpathy-loop/SKILL.md` for this run. |
+| **Prompt** | Read `projects/why-we-do-this/FOR_AGENTS.md` and follow `projects/why-we-do-this/skills/karpathy-loop/SKILL.md` for this run. |
 | **Tools** | Memories (recommended — tracks experiment history across nights) |
 
 ### 3. wwdt-weekly-longform
@@ -39,7 +39,7 @@ Open [cursor.com/automations/new](https://cursor.com/automations/new) and create
 |---|---|
 | **Trigger** | Scheduled — `0 12 * * 0` (Sunday 14:00 Europe/Amsterdam, CEST) |
 | **Repository** | icojerrel/opencut |
-| **Prompt** | Read `.cursor/automations/youtube-shorts/FOR_AGENTS.md` and follow `.cursor/automations/youtube-shorts/skills/weekly-longform/SKILL.md` for this run. |
+| **Prompt** | Read `projects/why-we-do-this/FOR_AGENTS.md` and follow `projects/why-we-do-this/skills/weekly-longform/SKILL.md` for this run. |
 
 ## Disable local cron
 
@@ -57,4 +57,4 @@ If Cursor Automations cannot be created yet, three workflows in `.github/workflo
 
 ## Verify
 
-Trigger each automation once manually from the dashboard (Run now). Check logs under `/workspace/faceless-video-engine/logs/` in the agent run artifacts.
+Trigger each automation once manually from the dashboard (Run now). Check logs under `projects/why-we-do-this/faceless-video-engine/logs/` in the agent run artifacts.
