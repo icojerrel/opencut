@@ -18,6 +18,7 @@
     "test:video": "node --experimental-strip-types scripts/test-video-quote.mjs",
     "test:persist": "npx tsx scripts/test-persistence.ts",
     "test": "npm run test:core && npm run test:persist && npm run test:video && npm run test:live",
+    "hunt": "tsx scripts/hunt-first-client.ts",
     "build:eve": "eve build",
     "dev:eve": "eve dev",
     "start:eve": "eve start"
