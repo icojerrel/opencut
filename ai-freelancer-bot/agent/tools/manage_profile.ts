@@ -22,7 +22,17 @@ export default defineTool({
   },
   async execute({ action, ...updates }) {
     if (action === "get") {
-      return { profile: getData().profile };
+      const data = getData();
+      return {
+        profile: data.profile,
+        summary: {
+          jobs: data.jobs.length,
+          proposals: data.proposals.length,
+          projects: data.projects.length,
+          invoices: data.invoices.length,
+          persisted: true,
+        },
+      };
     }
 
     const cleaned = Object.fromEntries(

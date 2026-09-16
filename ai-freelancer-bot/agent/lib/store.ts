@@ -10,6 +10,7 @@ import {
   matchJobsToProfile as matchJobsToProfileLogic,
   searchJobsInData,
 } from "./logic";
+import { loadOrDefault, savePersistedData } from "./persistence";
 import type {
   FreelancerData,
   FreelancerProfile,
@@ -23,15 +24,25 @@ import type {
 
 export { calculateRate, formatInvoice } from "./logic";
 
-export const freelancerStore = defineState("freelancer-bot.data", defaultData);
+/** Session cache — hydrated from disk on first access. */
+export const freelancerStore = defineState("freelancer-bot.data", () => loadOrDefault());
 
 export function getData(): FreelancerData {
   return freelancerStore.get();
 }
 
 export function updateData(updater: (data: FreelancerData) => FreelancerData): FreelancerData {
-  freelancerStore.update(updater);
-  return freelancerStore.get();
+  const next = updater(freelancerStore.get());
+  freelancerStore.update(() => next);
+  savePersistedData(next);
+  return next;
+}
+
+export function resetData(): FreelancerData {
+  const fresh = defaultData();
+  freelancerStore.update(() => fresh);
+  savePersistedData(fresh);
+  return fresh;
 }
 
 export function searchJobs(params: {

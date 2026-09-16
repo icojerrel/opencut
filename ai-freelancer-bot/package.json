@@ -16,7 +16,8 @@
     "test:core": "node --experimental-strip-types scripts/test-core.mjs",
     "test:live": "node --experimental-strip-types scripts/test-live-jobs.mjs",
     "test:video": "node --experimental-strip-types scripts/test-video-quote.mjs",
-    "test": "npm run test:core && npm run test:video && npm run test:live",
+    "test:persist": "node --experimental-strip-types scripts/test-persistence.mjs",
+    "test": "npm run test:core && npm run test:persist && npm run test:video && npm run test:live",
     "build:eve": "eve build",
     "dev:eve": "eve dev",
     "start:eve": "eve start"

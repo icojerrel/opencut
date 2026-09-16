@@ -51,12 +51,16 @@ npm run dev:eve && npm run dev
 
 ---
 
-## v2.0 — Toekomst (optioneel)
+## v2.0 — Persistente data ✅
+
+Profiel, jobs, proposals, projecten en facturen worden opgeslagen in `data/freelancer-data.json` en overleven server-restarts en nieuwe chats.
+
+## v2.1 — Toekomst (optioneel)
 
 | Feature | Beschrijving |
 |---------|--------------|
-| Persistente data | Profiel/jobs over sessies heen (database of file provider) |
 | Job alerts | Dagelijkse Slack/e-mail digest via eve schedules |
 | Evals | Automatische kwaliteitscheck op proposals |
 | Multi-user auth | Per gebruiker profiel en data |
 | Platform OAuth | Directe Upwork/Fiverr koppeling (indien API beschikbaar) |
+| Vercel deploy | Productie hosting via `eve deploy` |

@@ -45,7 +45,17 @@ Of typ zelf:
 
 > *"Ik ben video editor, €75/uur. Haal live jobs op, quote 5 Shorts/week, schrijf proposal voor job-004."*
 
-## 5. Deploy (productie)
+## 5. Persistente data
+
+Alles wat je opslaat (profiel, jobs, proposals) blijft bewaard in:
+
+```
+data/freelancer-data.json
+```
+
+Deze map staat in `.gitignore` — jouw data gaat niet mee in git.
+
+## 6. Deploy (productie)
 
 ```bash
 npx eve link
