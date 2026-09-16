@@ -10,11 +10,20 @@ npm install
 
 ## 2. Credentials
 
-Maak `.env.local`:
+**Optie A — Vercel OIDC (aanbevolen):**
+
+```bash
+npx eve link --project ai-freelancer-bot
+vercel env pull .env.local
+```
+
+**Optie B — API key:**
 
 ```bash
 AI_GATEWAY_API_KEY=jouw-key   # https://vercel.com/dashboard/ai/api-keys
 ```
+
+**Belangrijk:** Vercel AI Gateway vereist een creditcard op je team (gratis credits daarna). Zonder kaart krijg je *"model temporarily unavailable"*.
 
 Optioneel (Slack):
 
@@ -74,6 +83,12 @@ Slack: zie [SLACK_SETUP.md](./SLACK_SETUP.md).
 
 | Fout | Oplossing |
 |------|-----------|
-| `AI Gateway received no credentials` | Zet `AI_GATEWAY_API_KEY` in `.env.local`, herstart dev servers |
+| `AI Gateway received no credentials` | Run `npx eve link` of zet `AI_GATEWAY_API_KEY` in `.env.local`, herstart dev servers |
+| `model temporarily unavailable` / creditcard | Voeg creditcard toe in [Vercel Dashboard → AI](https://vercel.com/dashboard) |
+| `ERR_EMPTY_RESPONSE` op localhost:3000 | Oude dev-server: `lsof -ti :3000 \| xargs kill`, start `npm run dev:eve` + `npm run dev` opnieuw |
 | Node `<24` | `fnm install 24 && fnm use 24` |
 | Upwork live jobs leeg | Normaal (Cloudflare). Gebruik Jobicy/Remotive of `add_job` |
+
+## 7. Live demo
+
+Productie: **https://ai-freelancer-bot.vercel.app**

@@ -245,11 +245,7 @@ function ErrorMessage({ message }: { readonly message: string }) {
           <AlertCircleIcon className="mt-0.5 size-4 shrink-0 text-destructive" />
           <div>
             <p className="font-medium">Verzoek mislukt</p>
-            <p className="mt-0.5 text-muted-foreground">
-              {message.includes("no credentials")
-                ? "AI Gateway credentials ontbreken. Zet AI_GATEWAY_API_KEY in .env.local."
-                : message}
-            </p>
+            <p className="mt-0.5 text-muted-foreground">{formatChatError(message)}</p>
           </div>
         </div>
       </MessageContent>
@@ -291,6 +287,24 @@ function PendingThinking() {
       </MessageContent>
     </Message>
   );
+}
+
+function formatChatError(message: string): string {
+  const lower = message.toLowerCase();
+
+  if (lower.includes("no credentials")) {
+    return "AI Gateway credentials ontbreken. Run `npx eve link` in ai-freelancer-bot/ of zet AI_GATEWAY_API_KEY in .env.local.";
+  }
+
+  if (lower.includes("credit card") || lower.includes("customer_verification")) {
+    return "Vercel AI Gateway vereist een creditcard op je team (gratis credits daarna). Voeg een kaart toe via vercel.com/dashboard → AI.";
+  }
+
+  if (lower.includes("temporarily unavailable") || lower.includes("model_call_failed")) {
+    return "AI-model niet beschikbaar. Controleer of je Vercel-team een creditcard heeft voor AI Gateway, of probeer het later opnieuw.";
+  }
+
+  return message;
 }
 
 function toErrorMessage(error: unknown): string {

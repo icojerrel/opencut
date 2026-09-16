@@ -13,11 +13,13 @@
 
 | Variable | Verplicht | Beschrijving |
 |----------|-----------|--------------|
-| `AI_GATEWAY_API_KEY` | Ja* | [AI Gateway key](https://vercel.com/dashboard/ai/api-keys) |
+| `AI_GATEWAY_API_KEY` | Nee* | Alleen nodig zonder OIDC; op Vercel wordt OIDC automatisch geïnjecteerd |
 | `SLACK_BOT_TOKEN` | Nee | Slack bot token |
 | `SLACK_SIGNING_SECRET` | Nee | Slack signing secret |
 
-\* Op Vercel werkt ook **OIDC** automatisch als het project gelinkt is — dan is geen aparte key nodig.
+\* Op Vercel werkt **OIDC** automatisch — geen aparte key nodig. Wel vereist AI Gateway een **creditcard** op je Vercel-team (gratis credits).
+
+**Live:** https://ai-freelancer-bot.vercel.app
 
 ### 3. Deploy
 
