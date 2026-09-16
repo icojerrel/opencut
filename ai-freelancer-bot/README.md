@@ -31,11 +31,19 @@ npm run dev:eve    # :2000
 npm run dev        # :3000 → snelkoppelingen op homepage
 ```
 
+## Deploy (Vercel)
+
+Zie **[DEPLOY.md](./DEPLOY.md)** — Root Directory: `ai-freelancer-bot`
+
+```bash
+vercel login && vercel --prod
+```
+
 ## Testen
 
 ```bash
 npm run typecheck
-npm run test       # core + video + live
+npm run test       # core + persist + video + live
 ```
 
 ## Roadmap
