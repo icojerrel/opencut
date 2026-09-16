@@ -1,10 +1,17 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { defaultData } from "./default-data.ts";
-import type { FreelancerData } from "./types.ts";
+import { defaultData } from "./default-data.js";
+import type { FreelancerData } from "./types.js";
 
 function dataDir(): string {
-  return process.env.FREELANCEBOT_DATA_DIR ?? join(process.cwd(), "data");
+  if (process.env.FREELANCEBOT_DATA_DIR) {
+    return process.env.FREELANCEBOT_DATA_DIR;
+  }
+  // Vercel serverless: only /tmp is writable (ephemeral per instance)
+  if (process.env.VERCEL) {
+    return join("/tmp", "freelancebot-data");
+  }
+  return join(process.cwd(), "data");
 }
 
 function dataFilePath(): string {

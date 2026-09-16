@@ -16,7 +16,7 @@
     "test:core": "node --experimental-strip-types scripts/test-core.mjs",
     "test:live": "node --experimental-strip-types scripts/test-live-jobs.mjs",
     "test:video": "node --experimental-strip-types scripts/test-video-quote.mjs",
-    "test:persist": "node --experimental-strip-types scripts/test-persistence.mjs",
+    "test:persist": "npx tsx scripts/test-persistence.ts",
     "test": "npm run test:core && npm run test:persist && npm run test:video && npm run test:live",
     "build:eve": "eve build",
     "dev:eve": "eve dev",
@@ -57,6 +57,7 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "microsandbox": "^0.5.10",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3"
   },
   "engines": {

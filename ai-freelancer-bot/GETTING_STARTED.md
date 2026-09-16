@@ -55,12 +55,18 @@ data/freelancer-data.json
 
 Deze map staat in `.gitignore` — jouw data gaat niet mee in git.
 
-## 6. Deploy (productie)
+## 6. Deploy op Vercel
 
-```bash
-npx eve link
-npm run deploy
-```
+Zie **[DEPLOY.md](./DEPLOY.md)** voor de volledige gids.
+
+Kort:
+
+1. [vercel.com/new](https://vercel.com/new) → import repo
+2. **Root Directory:** `ai-freelancer-bot`
+3. Env var: `AI_GATEWAY_API_KEY`
+4. Deploy
+
+Of via CLI: `vercel --prod` vanuit `ai-freelancer-bot/`.
 
 Slack: zie [SLACK_SETUP.md](./SLACK_SETUP.md).
 
