@@ -1,0 +1,91 @@
+import type { FreelancerData } from "./types";
+
+export const defaultData = (): FreelancerData => ({
+  profile: {
+    name: "",
+    title: "Freelancer",
+    skills: [],
+    hourlyRate: 75,
+    currency: "EUR",
+    experienceYears: 3,
+    bio: "",
+    portfolio: [],
+    availability: "available",
+  },
+  jobs: [
+    {
+      id: "job-001",
+      title: "Next.js dashboard voor SaaS startup",
+      client: "TechFlow BV",
+      description:
+        "Analytics dashboard bouwen met React/Next.js, TypeScript en Tailwind. Duur: 4-6 weken, remote.",
+      budget: "€4.000 - €6.000",
+      skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      platform: "LinkedIn",
+      postedAt: "2026-09-10",
+      status: "open",
+    },
+    {
+      id: "job-002",
+      title: "AI chatbot integratie in webapp",
+      client: "RetailPlus",
+      description:
+        "AI-assistent integreren in e-commerce platform. API design, streaming, rate limiting. Node.js of Python.",
+      budget: "€80/uur",
+      skills: ["AI", "Node.js", "API", "Python"],
+      platform: "Upwork",
+      postedAt: "2026-09-12",
+      status: "open",
+    },
+    {
+      id: "job-003",
+      title: "WordPress naar headless CMS migratie",
+      client: "MediaGroep NL",
+      description:
+        "200+ artikelen migreren naar Sanity CMS met Next.js frontend. SEO behoud en redirect mapping.",
+      budget: "€5.000 - €8.000",
+      skills: ["Next.js", "Sanity", "WordPress", "SEO"],
+      platform: "Freelance.nl",
+      postedAt: "2026-09-08",
+      status: "open",
+    },
+    {
+      id: "job-004",
+      title: "YouTube Shorts editor (3x per week)",
+      client: "GrowthLab Media",
+      description:
+        "Podcast → 3 Shorts/week. Jump cuts, captions, B-roll. Premiere Pro of DaVinci.",
+      budget: "€400/maand retainer",
+      skills: ["Premiere Pro", "DaVinci Resolve", "YouTube Shorts"],
+      platform: "Upwork",
+      postedAt: "2026-09-14",
+      status: "open",
+    },
+    {
+      id: "job-005",
+      title: "Remotion developer voor faceless video SaaS",
+      client: "AutoClip Inc",
+      description:
+        "Remotion template systeem: dynamische scenes, TTS sync, batch export. TypeScript + React.",
+      budget: "€120/uur",
+      skills: ["Remotion", "React", "TypeScript", "FFmpeg"],
+      platform: "RemoteOK",
+      postedAt: "2026-09-12",
+      status: "open",
+    },
+    {
+      id: "job-006",
+      title: "TikTok/Reels editor voor fitness creator",
+      client: "Coach Mike",
+      description: "15-30 sec hooks, trending audio, 5 reels/week. CapCut of Premiere. 48u turnaround.",
+      budget: "€50/video",
+      skills: ["CapCut", "Premiere Pro", "TikTok"],
+      platform: "Direct",
+      postedAt: "2026-09-15",
+      status: "open",
+    },
+  ],
+  proposals: [],
+  projects: [],
+  invoices: [],
+});
